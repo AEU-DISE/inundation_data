@@ -1,0 +1,60 @@
+---
+title: "Inundation Data Combine"
+author: "Haley"
+date: "5/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#load packages
+```{r include=FALSE}
+library(readr)
+library(ggplot2)
+library(lubridate)
+library(rcompanion)
+library(viridis)
+library(dplyr)
+library(ggthemes)
+library(tidyverse)
+library(rcartocolor) #for options, see: https://github.com/Nowosad/rcartocolor
+```
+#Load files
+```{r}
+setwd("Z:\\Useful Calculations!\\Inundation\\Working Files")
+LIS<- read_csv("Daily Average 1998-2021.csv")
+FW_Ist<-read_csv("Inundation 1998 to 2021.csv")
+```
+#Convert dates 
+```{r}
+LIS$Date<-mdy(LIS$Date)
+FW_Ist$Date<-mdy(FW_Ist$Date)
+```
+#Combine
+```{r}
+All <- left_join(FW_Ist, LIS, 
+              by = c("Date"))
+```
+#Export
+```{r}
+write.csv(All, "Yolo_Bypass_Inundation_1998-2021.csv")
+```
+######Convert dates to YYYY-MM-DD
+#Read in file again
+```{r}
+setwd("Z:\\Useful Calculations!\\Inundation\\Working Files")
+Inund<- read_csv("Yolo_Bypass_Inundation_1998-2021.csv")
+```
+#Convert dates to YYYY-MM-DD
+```{r}
+Inund$Date<- format(as.POSIXct(strptime(Inund$Date,"%m/%d/%Y",tz="")) ,format = "%Y/%m/%d")
+Inund$Date<- as.Date(Inund$Date)
+Inund$Date<-ymd(Inund$Date)
+```
+#Export
+```{r}
+setwd("Z:\\Useful Calculations!\\Inundation")
+#write.csv(Inund, "Yolo_Bypass_Inundation1998-2021.csv",row.names = FALSE)
+```
