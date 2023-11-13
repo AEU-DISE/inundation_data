@@ -22,6 +22,7 @@ library(dplyr)
 library(ggthemes)
 library(tidyverse)
 library(rcartocolor) #for options, see: https://github.com/Nowosad/rcartocolor
+library(tidylog)
 ```
 
 ```{r}
