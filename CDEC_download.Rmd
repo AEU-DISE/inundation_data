@@ -37,6 +37,7 @@ library(data.table) #rbindlist()
 library(lubridate) #today()
 library(CDECRetrieve) #cdec_datasets
 library(readr)
+library(tidylog)
 ```
 
 
