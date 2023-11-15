@@ -101,7 +101,7 @@ start <- "2018-01-01"
 end <- "2022-12-31"
 
 # Define sensor number, time interval 
-sensors <- c("25") # Water Temperature Celsius - appears to now be in F?
+sensors <- c("1") # sensor 25 is Water Temperature Celsius - appears to now be in F?
 interval <- "E" # Event = every 15 minutes, H = Hourly, A = Annual
 
 ### Download data, bind, write --------------------------------------------
@@ -129,7 +129,7 @@ start <- "2010-01-01"
 end <- "2022-12-31"
 
 # Define sensor number, time interval 
-sensors <- c("25", "221") # Water Temperature Celsius and Turbidity
+sensors <- c("1") # stage, removed (25) Water Temperature Celsius and Turbidity (221)
 interval <- "E" # Event = every 15 minutes
 
 
