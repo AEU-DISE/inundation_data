@@ -125,7 +125,7 @@ If you want to query multiple sensors but one station:
 stations <- "LIS"
 
 # Define start and end dates - these will remain the same throughout
-start <- "2002-01-01"
+start <- "2003-01-01"
 end <- "2022-12-31"
 
 # Define sensor number, time interval 
