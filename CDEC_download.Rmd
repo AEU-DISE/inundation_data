@@ -86,6 +86,8 @@ cdec_temp <- cdec_datasets_df %>%
 These are at Pacific Daylight Time
 See https://info.water.ca.gov/misc/sql_dates.html for information about how CDEC deals with Daylight Savings Time
 
+There is a cder package for interfacing with cdec https://cran.rstudio.com/web/packages/cder/cder.pdf 
+
 This step may take a while.
 
 To query for multiple stations but one sensor:
