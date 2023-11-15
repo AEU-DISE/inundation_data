@@ -7,6 +7,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+#Updated ____ L. Vance for updated dataset
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -26,9 +28,8 @@ library(tidylog)
 ```
 
 ```{r}
-setwd("Z:\\Useful Calculations!\\Inundation\\Working Files")
-LISStage <- read_csv("LIS Stage 2002-2021.csv")
-LISStage98_02 <- read_csv("LIS Stage 1998-2002.csv")
+LISStage <- read_csv("Working files/LIS Stage 2003-2022.csv")
+LISStage98_02 <- read_csv("Working files/LIS Stage 1998-2002.csv")
 #R is reading in 20 NAs from the beginning but cant figure out how to match to date 
 #LISStage= subset(LISStage, select = -c(X3) )
 LISStage$Date <- format(as.POSIXct(strptime(LISStage$`DATE / TIME (PST)`,"%m/%d/%Y %H:%M",tz="")) ,format = "%m/%d/%Y")
