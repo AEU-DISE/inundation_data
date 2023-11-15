@@ -13,3 +13,5 @@ for(i in 1:length(stations)){
   dataset$station <- stations[i]  # just for an identifier
   sensordataset[[i]] <- dataset
 } 
+
+cdec_query(stations)
