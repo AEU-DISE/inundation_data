@@ -125,7 +125,7 @@ If you want to query multiple sensors but one station:
 stations <- "LIS"
 
 # Define start and end dates - these will remain the same throughout
-start <- "2010-01-01"
+start <- "2002-01-01"
 end <- "2022-12-31"
 
 # Define sensor number, time interval 
@@ -148,7 +148,7 @@ sensors_df <- bind_rows(Data_sensors) # bind rows into data frame
 
 Write data 
 ```{r}
-write_csv(sensors_df, "Data/Temp_raw.csv") #write data
-saveRDS(sensors_df, "Data/Temp_raw.rds") #write rds
+write_csv(sensors_df, "Data/Stage_raw.csv") #write data
+saveRDS(sensors_df, "Data/Stage_raw.rds") #write rds
 ```
 
