@@ -130,8 +130,8 @@ CheckNA2 <- filter(DailyStage2, is.na(mean_Daily))
 ```
 
 ```{r}
-write.csv(DailyStage, "Daily Average 2003-2022.csv")
-write.csv(DailyStage2, "Daily Average 1998-2002.csv")
+write_csv(DailyStage, "Daily Average 2003-2022.csv")
+write_csv(DailyStage2, "Daily Average 1998-2002.csv")
 ```
 
 
