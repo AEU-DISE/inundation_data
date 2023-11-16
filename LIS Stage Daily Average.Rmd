@@ -118,10 +118,14 @@ new_DF3 <- DailyStage[is.na(DailyStage$mean_Daily),] #583 - seems reasonable for
 #Peak Stage of Record is 27.5 feet 
 DailyStage <- DailyStage[which(DailyStage$mean_Daily <= 27.5),]
 DailyStage2 <- DailyStage2[which(DailyStage2$mean_Daily <= 27.5),]
+
+#removing data errors/outliers returns 0 NA, using peak stage of record as max
+CheckNA <- filter(DailyStage, is.na(mean_Daily))
+CheckNA2 <- filter(DailyStage2, is.na(mean_Daily))
 ```
 
 ```{r}
-write.csv(DailyStage, "Daily Average 2002-2021.csv")
+write.csv(DailyStage, "Daily Average 2003-2022.csv")
 write.csv(DailyStage2, "Daily Average 1998-2002.csv")
 ```
 
