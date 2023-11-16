@@ -25,8 +25,7 @@ library(rcartocolor) #for options, see: https://github.com/Nowosad/rcartocolor
 ```
 #Load files
 ```{r}
-setwd("Z:\\Useful Calculations!\\Inundation\\Working Files")
-LIS<- read_csv("Daily Average 1998-2021.csv")
+LIS<- read_csv("LIS Daily Average 1998-2022.csv")
 FW_Ist<-read_csv("Inundation 1998 to 2021.csv")
 ```
 #Convert dates 
