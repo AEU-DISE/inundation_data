@@ -34,15 +34,16 @@ LISStage98_02 <- read_csv("Working files/LIS Stage 1998-2002.csv")
 AnyNA <- filter(LISStage98_02, is.na(Stage))
 AnyNA0 <- filter(LISStage, is.na(Stage))
 
-#there are 30 NA values from CDEC - notate later?
+#there are 30 NA stage values from CDEC - notate later? 1998-2002
+#1694 NA stage values 2003-2022
 
 LISStage$Dates <- as.Date(LISStage$Date)
 #updated column name since formatting is now similar to 1998-2002
 
 LISStage98_02$Dates<- as.Date(LISStage98_02$Date)
 
-LISStage98_02$Dates<-ymd(LISStage98_02$Dates)
-LISStage$Date<-mdy(LISStage$Date)
+#LISStage98_02$Dates<-ymd(LISStage98_02$Dates) doesnt seem needed to adjust
+#LISStage$Date<-mdy(LISStage$Date)   seems to already be formatted simliar to the other file
 
 #Haley - this was my lazy workaround to the date issue. one weird thing to note is they were all times in april or march at 2:00am
 #make dataframe with NA dates to find problems
