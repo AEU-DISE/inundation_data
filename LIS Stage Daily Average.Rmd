@@ -36,7 +36,8 @@ AnyNA0 <- filter(LISStage, is.na(Stage))
 
 #there are 30 NA values from CDEC - notate later?
 
-LISStage$Date <- format(as.POSIXct(strptime(LISStage$`DATE / TIME (PST)`,"%m/%d/%Y %H:%M",tz="")) ,format = "%m/%d/%Y")
+LISStage$Dates <- as.Date(LISStage$Date)
+#updated column name since formatting is now similar to 1998-2002
 
 LISStage98_02$Dates<- as.Date(LISStage98_02$Date)
 
