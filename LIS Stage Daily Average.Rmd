@@ -30,8 +30,12 @@ library(tidylog)
 ```{r}
 LISStage <- read_csv("Working files/LIS Stage 2003-2022.csv")
 LISStage98_02 <- read_csv("Working files/LIS Stage 1998-2002.csv")
-#R is reading in 20 NAs from the beginning but cant figure out how to match to date 
-#LISStage= subset(LISStage, select = -c(X3) )
+
+AnyNA <- filter(LISStage98_02, is.na(Stage))
+AnyNA0 <- filter(LISStage, is.na(Stage))
+
+#there are 30 NA values from CDEC - notate later?
+
 LISStage$Date <- format(as.POSIXct(strptime(LISStage$`DATE / TIME (PST)`,"%m/%d/%Y %H:%M",tz="")) ,format = "%m/%d/%Y")
 
 LISStage98_02$Dates<- as.Date(LISStage98_02$Date)
