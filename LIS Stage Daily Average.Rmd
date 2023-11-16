@@ -132,6 +132,19 @@ CheckNA2 <- filter(DailyStage2, is.na(mean_Daily))
 ```{r}
 write_csv(DailyStage, "Daily Average 2003-2022.csv")
 write_csv(DailyStage2, "Daily Average 1998-2002.csv")
+
+LIS1 <- read_csv("Daily Average 1998-2002.csv")
+LIS2 <- read_csv("Daily Average 2003-2022.csv")
+
+Blank <- filter(LIS1, is.na(Dates))
+Blank2 <-filter(LIS2, is.na(Dates))
+
+#combine and get rid of last NA
+
+LISComb <- bind_rows(LIS1, LIS2) %>%
+  filter(!is.na(Dates))
+
+write_csv(LISComb, "LIS Daily Average 1998-2022.csv")
 ```
 
 
