@@ -33,12 +33,42 @@ library(rcartocolor)
 library(tidylog)
 ```
 
-## Including Plots
+3. Load files
 
-You can also embed plots, for example:
+```{r}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+#WDL includes a lot of information at the top of the exported csv, skip for easier column headers 
+FW <- read_csv("Working files/A02170_Stage_Daily_Mean.csv", skip =8)
+ISt <- read_csv("Working files/A02100_Stage_Daily_Mean.csv", skip = 8)
+```
+
+4. Rename columns and adjust files for calculating estimated inundation at each sensor
+
+```{r}
+
+ISt <- ISt %>%
+  rename(DateTime = 'Date Time',
+         StageISt = 'Stage Daily Mean (FOOT)',
+         QualityCodeISt = 'Quality Code') %>%
+  select(-c(QualityCodeISt))
+
+FW <- FW %>%
+  rename(DateTime = 'Date Time',
+         StageFW = 'Stage Daily Mean (FOOT)',
+         QualityCodeFW = 'Quality Code') %>%
+  select(-c(QualityCodeFW))
+
+StagesJoined <- FW %>%
+  left_join(ISt, by = "DateTime")
+
+write_csv(StagesJoined, "StagesJoined.csv")
+
+Inundation <- StagesJoined %>%
+  mutate(InundationFW = ifelse(StageFW >= "32", "Inundated", "Not Inundated"),
+         InundationISt = ifelse(StageISt >= "17", "Inundated", "Not Inundated"))
+
+#first few ISt stages show as inundated, incorrectly...why?
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
