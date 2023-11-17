@@ -13,3 +13,13 @@ library(tidylog)
 FW <- read_csv("Working files/A02170_Stage_Daily_Mean.csv", skip =8)
 ISt <- read_csv("Working files/A02100_Stage_Daily_Mean.csv", skip = 8)
 
+ISt <- ISt %>%
+  rename(DateTime = 'Date Time',
+         StageISt = 'Stage Daily Mean (FOOT)',
+         QualityCodeISt = 'Quality Code')
+
+
+FW <- FW %>%
+  rename(DateTime = 'Date Time',
+         StageFW = 'Stage Daily Mean (FOOT)',
+         QualityCodeFW = 'Quality Code')
