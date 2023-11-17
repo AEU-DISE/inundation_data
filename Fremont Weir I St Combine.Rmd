@@ -68,7 +68,11 @@ Inundation <- StagesJoined %>%
          InundationISt = ifelse(StageISt >= "17", "Inundated", "Not Inundated")) %>%
   select(c(DateTime, StageFW, InundationFW, StageISt, InundationISt))
 
-#first few ISt stages show as inundated, incorrectly...why?
+#first few ISt stages show as inundated, incorrectly...why? find correction
+
+#Write to csv for current data publishing period for use in both inundation dataset and drift data analysis
+
+write_csv(Inundation, "Yolo Bypass Inundation 1998-2022.csv")
 
 ```
 
