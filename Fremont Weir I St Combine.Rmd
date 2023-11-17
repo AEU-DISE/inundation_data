@@ -1,0 +1,36 @@
+---
+title: "FW and ISt Combine"
+author: "Lisa Vance"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Code for combining Fremont Weir and I St stage data for inundation estimate
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+First, retrieve Fremont Weir and I St stage data from WDL:
+
+Fremont Weir:
+
+I St: 
+
+Select custom range - YBFMP monitoring starts 1998 and select through date range for publishing
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
