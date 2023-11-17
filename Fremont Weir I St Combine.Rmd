@@ -11,18 +11,26 @@ Code for combining Fremont Weir and I St stage data for inundation estimate
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+1. Retrieve Fremont Weir and I St stage data from WDL:
+   Select custom range - YBFMP monitoring starts 1998 and select through date range for publishing
 
-First, retrieve Fremont Weir and I St stage data from WDL:
+  Fremont Weir(Station #A02170):
+  https://wdl.water.ca.gov/WaterDataLibrary/StationDetails.aspx?Station=A02170&source=map
 
-Fremont Weir:
+  I St(Station #A02100): https://wdl.water.ca.gov/WaterDataLibrary/StationDetails.aspx?Station=A02100&source=map
 
-I St: 
-
-Select custom range - YBFMP monitoring starts 1998 and select through date range for publishing
-
-```{r cars}
-summary(cars)
+2. Packages
+```{r setup, include=FALSE}
+library(readr)
+library(ggplot2)
+library(lubridate)
+library(rcompanion)
+library(viridis)
+library(dplyr)
+library(ggthemes)
+library(tidyverse)
+library(rcartocolor)
+library(tidylog)
 ```
 
 ## Including Plots
