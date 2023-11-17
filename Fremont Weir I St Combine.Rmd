@@ -64,11 +64,9 @@ StagesJoined <- FW %>%
 write_csv(StagesJoined, "StagesJoined.csv")
 
 Inundation <- StagesJoined %>%
-  mutate(InundationFW = ifelse(StageFW >= "32", "Inundated", "Not Inundated"),
-         InundationISt = ifelse(StageISt >= "17", "Inundated", "Not Inundated")) %>%
+  mutate(InundationFW = ifelse(StageFW >= 32, "Inundated", "Not Inundated"),
+         InundationISt = ifelse(StageISt >= 17, "Inundated", "Not Inundated")) %>%
   select(c(DateTime, StageFW, InundationFW, StageISt, InundationISt))
-
-#first few ISt stages show as inundated, incorrectly...why? find correction
 
 #Write to csv for current data publishing period for use in both inundation dataset and drift data analysis
 
