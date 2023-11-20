@@ -61,12 +61,22 @@ FW <- FW %>%
 StagesJoined <- FW %>%
   left_join(ISt, by = "DateTime")
 
+str(StagesJoined)
+
+#remove time from date so columns will match with LIS data
+
+StagesJoined$Dates <- format(as.POSIXct(strptime(StagesJoined$DateTime,"%m/%d/%Y",tz="")) ,format = "%Y/%m/%d")
+
 write_csv(StagesJoined, "StagesJoined.csv")
 
 Inundation <- StagesJoined %>%
   mutate(InundationFW = ifelse(StageFW >= 32, "Inundated", "Not Inundated"),
          InundationISt = ifelse(StageISt >= 17, "Inundated", "Not Inundated")) %>%
-  select(c(DateTime, StageFW, InundationFW, StageISt, InundationISt))
+  select(c(Dates, StageFW, InundationFW, StageISt, InundationISt))%>%
+  mutate(Overtopping = case_when(InundationFW == "Inundated" ~ TRUE,
+                                 InundationISt == "Inundated" ~ TRUE, 
+                                 InundationFW == "Not Inundated" ~ FALSE,
+                                 InundationISt == "Not Inundated" ~ FALSE))
   
 
 #Write to csv for current data publishing period for use in both inundation dataset and drift data analysis
@@ -75,4 +85,3 @@ write_csv(Inundation, "Yolo Bypass Inundation 1998-2022.csv")
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
