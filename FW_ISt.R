@@ -32,8 +32,13 @@ str(StagesJoined)
 
 Inundation <- StagesJoined %>%
   mutate(InundationFW = ifelse(StageFW >= 32, "Inundated", "Not Inundated"),
-       InundationISt = ifelse(StageISt >= 17, "Inundated", "Not Inundated")) %>%
-  select(c(DateTime, StageFW, InundationFW, StageISt, InundationISt))
+         InundationISt = ifelse(StageISt >= 17, "Inundated", "Not Inundated")) %>%
+  select(c(DateTime, StageFW, InundationFW, StageISt, InundationISt)) %>%
+  mutate(Overtopping = case_when(InundationFW == "Inundated" ~ TRUE,
+                                 InundationISt == "Inundated" ~ TRUE, 
+                                 InundationFW == "Not Inundated" ~ FALSE,
+                                 InundationISt == "Not Inundated" ~ FALSE))
 
 #issue with incorrect inundation values was "" around the numbers. do not put in markdown
 
+write_csv(Inundation, "Working files/Inundation.csv")
