@@ -48,13 +48,13 @@ ISt <- read_csv("Working files/A02100_Stage_Daily_Mean.csv", skip = 8)
 
 ISt <- ISt %>%
   rename(DateTime = 'Date Time',
-         StageISt = 'Stage Daily Mean (FOOT)',
+         StageHeight_ISt = 'Stage Daily Mean (FOOT)',
          QualityCodeISt = 'Quality Code') %>%
   select(-c(QualityCodeISt))
 
 FW <- FW %>%
   rename(DateTime = 'Date Time',
-         StageFW = 'Stage Daily Mean (FOOT)',
+         StageHeight_FW = 'Stage Daily Mean (FOOT)',
          QualityCodeFW = 'Quality Code') %>%
   select(-c(QualityCodeFW))
 
@@ -70,13 +70,13 @@ StagesJoined$Dates <- format(as.POSIXct(strptime(StagesJoined$DateTime,"%m/%d/%Y
 write_csv(StagesJoined, "StagesJoined.csv")
 
 Inundation <- StagesJoined %>%
-  mutate(InundationFW = ifelse(StageFW >= 32, "Inundated", "Not Inundated"),
-         InundationISt = ifelse(StageISt >= 17, "Inundated", "Not Inundated")) %>%
-  select(c(Dates, StageFW, InundationFW, StageISt, InundationISt))%>%
-  mutate(Overtopping = case_when(InundationFW == "Inundated" ~ TRUE,
-                                 InundationISt == "Inundated" ~ TRUE, 
-                                 InundationFW == "Not Inundated" ~ FALSE,
-                                 InundationISt == "Not Inundated" ~ FALSE))
+  mutate(Overtopping_FW = ifelse(StageHeight_FW >= 32, "Yes", "No"),
+         Overtopping_ISt = ifelse(StageHeight_ISt >= 17, "Yes", "No")) %>%
+  select(c(Dates, StageHeight_FW, Overtopping_FW, StageHeight_ISt, Overtopping_ISt))%>%
+  mutate(Overtopping = case_when(Overtopping_FW == "Yes" ~ TRUE,
+                                 Overtopping_ISt == "Yes" ~ TRUE, 
+                                 Overtopping_FW == "No" ~ FALSE,
+                                 Overtopping_ISt == "No" ~ FALSE))
   
 
 #Write to csv for current data publishing period for use in both inundation dataset and drift data analysis
