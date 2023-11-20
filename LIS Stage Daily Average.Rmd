@@ -142,7 +142,10 @@ Blank2 <-filter(LIS2, is.na(Dates))
 #combine and get rid of last NA
 
 LISComb <- bind_rows(LIS1, LIS2) %>%
-  filter(!is.na(Dates))
+  filter(!is.na(Dates)) %>%
+  rename(StageHeight_LIS = 'mean_Daily') %>%
+  mutate(Overtopping_LIS = ifelse(StageHeight_LIS >= 13, "Yes", "No")) %>%
+  select(c(Dates, StageHeight_LIS, Overtopping_LIS))
 
 write_csv(LISComb, "LIS Daily Average 1998-2022.csv")
 ```
