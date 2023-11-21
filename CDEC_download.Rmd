@@ -146,7 +146,7 @@ sensors_df <- bind_rows(Data_sensors) # bind rows into data frame
 
 Write data 
 ```{r}
-write_csv(sensors_df, "Data/Stage_raw.csv") #write data
-saveRDS(sensors_df, "Data/Stage_raw.rds") #write rds
+write_csv(sensors_df, "Data raw/Stage_raw.csv") #write data
+saveRDS(sensors_df, "Data raw/Stage_raw.rds") #write rds
 ```
 
