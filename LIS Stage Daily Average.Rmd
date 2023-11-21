@@ -47,14 +47,11 @@ LISStage$Dates <- as.Date(LISStage$Date)
 
 LISStage98_02$Dates<- as.Date(LISStage98_02$Date)
 
-#LISStage98_02$Dates<-ymd(LISStage98_02$Dates) doesnt seem needed to adjust
-#LISStage$Date<-mdy(LISStage$Date)   seems to already be formatted simliar to the other file
-
 str(LISStage)
 str(LISStage98_02)
 #all are in matching column types
 
-#################################################################
+#################################################################################################################
 #Haley - this was my lazy workaround to the date issue. one weird thing to note is they were all times in april or march at 2:00am
 #make dataframe with NA dates to find problems
 # new_DF <- LISStage[is.na(LISStage$Date),]
@@ -89,13 +86,15 @@ str(LISStage98_02)
 # #set stage to numeric - the problem you were having with the summarize code was due to the fact the stage height was assigned as a "character" instead of a number. to see what columns are classified as you can use the code: str(LISStage)
 # LISStage$Stage <- as.numeric(LISStage$Stage)
 # LISStage98_02$Stage <- as.numeric(LISStage98_02$Stage)
-###################################################################################################
+##################################################################################################################
   
-#FYI, there are some very large stage heights on some dates - may want to remove outliers before proceeding
+#there are some very large stage heights on some dates - remove outliers before proceeding
 
 DailyStage <- LISStage %>%
   group_by(Dates) %>%
-  summarize(mean_Daily = mean(Stage))
+  summarize(mean_Daily = mean(Stage)) %>%
+  mutate_if(is.numeric, round, digits = 2)
+  
 
 #check for any NA values for stage height on dates - confirm if values existed on those dates
 
@@ -104,25 +103,30 @@ NADaily <- filter(DailyStage, is.na(mean_Daily))
 
 DailyStage2 <- LISStage98_02 %>%
   group_by(Dates) %>%
-  summarize(mean_Daily = mean(Stage))
+  summarize(mean_Daily = mean(Stage)) %>%
+  mutate_if(is.numeric, round, digits =2)
 
 #check for any NA values for stage hight on dates - confirm if values existed on those dates
 
 NADaily2 <- filter(DailyStage2, is.na(mean_Daily))
 #22 NA dailiy means - check dates
 
-#####################################################
+#########################################################################################################
 # #see how many NAs are returned
 # new_DF3 <- DailyStage[is.na(DailyStage$mean_Daily),] #583 - seems reasonable for this long of a dataset
 # #one NA in a day returns an NA for the whole daily average  
 
 #There are 21 NAs returned for the 1998-2002 data
-####################################################
+#########################################################################################################
 
 #Eliminating Data Errors/ Outliers 
 #Peak Stage of Record is 27.5 feet 
 DailyStage <- DailyStage[which(DailyStage$mean_Daily <= 27.5),]
 DailyStage2 <- DailyStage2[which(DailyStage2$mean_Daily <= 27.5),]
+
+#check to ensure errors over 27.5 were removed
+Check <- filter(DailyStage, mean_Daily > 27.5)
+Check2 <- filter(DailyStage2, mean_Daily > 27.5)
 
 #removing data errors/outliers returns 0 NA, using peak stage of record as max
 CheckNA <- filter(DailyStage, is.na(mean_Daily))
