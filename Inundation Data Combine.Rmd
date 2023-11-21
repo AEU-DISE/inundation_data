@@ -37,17 +37,27 @@ FW_Ist$Date<-mdy(FW_Ist$Date)
 #Combine
 ```{r}
 All <- left_join(FW_Ist, LIS, 
-              by = c("Date"))
+              by = c("Dates"))
+
+All <- All %>%
+    mutate(Inundation = case_when(Overtopping_FW == "Yes" ~ TRUE,
+                                 Overtopping_ISt == "Yes" ~ TRUE,
+                                 Overtopping_LIS == "Yes" ~ TRUE,
+                                 Overtopping_FW == "No" ~ FALSE,
+                                 Overtopping_ISt == "No" ~ FALSE,
+                                 Overtopping_LIS == "No" ~ FALSE)) %>%
+  select(c(Dates, StageHeight_FW, Overtopping_FW, StageHeight_ISt, Overtopping_ISt, StageHeight_LIS, 
+           Overtopping_LIS, Inundation))
 ```
 #Export
 ```{r}
-write.csv(All, "Yolo_Bypass_Inundation_1998-2021.csv")
+write.csv(All, "Yolo_Bypass_Inundation_1998-2022.csv")
 ```
 ######Convert dates to YYYY-MM-DD
 #Read in file again
 ```{r}
 setwd("Z:\\Useful Calculations!\\Inundation\\Working Files")
-Inund<- read_csv("Yolo_Bypass_Inundation_1998-2021.csv")
+Inund<- read_csv("Yolo_Bypass_Inundation_1998-2022.csv")
 ```
 #Convert dates to YYYY-MM-DD
 ```{r}
